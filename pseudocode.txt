@@ -1,0 +1,71 @@
+START
+
+SET player_health TO 25
+SET treats TO 0
+SET bandit_health TO 10
+
+DISPLAY "Welcome to AS91896 Text Adventure"
+ASK "Would you like to play?"
+IF answer == No 
+    END GAME
+
+DISPLAY user manual
+
+DISPLAY "You are at the forest entrance"
+ASK "1. Go forward or 2. Turn back"
+IF answer == 2
+    DISPLAY "You got lost and perished"
+    END GAME
+
+WHILE player is playing
+    CHOOSE random scenario: cave, clearing, or bandit
+
+    IF scenario == cave
+        DISPLAY cave choices
+        ASK player
+        IF sleep in cave 
+            RANDOM outcome: safe sleep or bear attack
+            IF safe
+                INCREASE health
+            ELSE
+                DECREASE treats and health
+
+    ELSE IF scenario == clearing 
+        DISPLAY clearing choices
+        ASK player
+        IF explore 
+            RANDOM outcome: trip or squirrel
+            IF trip 
+                DECREASE health
+            ELSE IF help squirrel 
+                INCREASE treats
+
+    ELSE IF scenario == bandit 
+        DISPLAY bandit choices
+        ASK player
+        IF try to befriend 
+            RANDOM outcome: success or failure
+            IF success 
+                INCREASE treats
+            ELSE
+                DECREASE health
+                ASK chase bandit?
+                IF yes 
+                    DECREASE health more
+                
+            
+        ELSE IF fight 
+            LOOP bandit fight
+                RANDOM action: hit, miss, get hit
+                IF bandit_health <= 0 
+                    BREAK fight
+                IF player_health <= 0 
+                    DISPLAY "You died"
+                    END GAME
+        
+    
+
+    CHECK if player presses 8 → show stats
+    CHECK if player presses 9 → end game
+
+END
